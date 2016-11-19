@@ -26,6 +26,8 @@
 
 namespace Slim\View;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * A Mustache view class for Slim 3 Framework
  * @author    Andrews Lince <andrews.lince@gmail.com>
@@ -65,46 +67,53 @@ class Mustache
     }
 
     /**
-     *
+     * Render a mustache template
      * @author Andrews Lince <andrews.lince@gmail.com>
      * @since  1.0.0
-     * @param  Psr\Http\Message\ResponseInterface $response
-     * @param  string $template
-     * @param  array  $data
-     * @return Psr\Http\Message\ResponseInterface
+     * @param  ResponseInterface $response
+     * @param  string            $template
+     * @param  array             $data
+     * @return ResponseInterface
      */
     public function render(
-        Psr\Http\Message\ResponseInterface $response,
+        ResponseInterface $response,
         $template,
         array $data = []
     ) {
 
-        // load template informations
-        $tpl = $this->templateEngine->loadTemplate($template);
-
         // render output
-        $response->getBody()->write($tpl->render($data));
+        $response->getBody()->write(
+            $this->templateEngine->render($template, $data)
+        );
 
         return $response;
     }
 
     /**
-     *
+     * Returns the instance from Mustache Template Engine
      * @author Andrews Lince <andrews.lince@gmail.com>
      * @since  1.0.0
      * @param  array $options
+     * - template
+     *   - extension
+     *   - charset
+     *   - paths[]
      * @return Mustache_Engine
      */
     public function getTemplateEngine(array $options = [])
     {
         if (is_null($this->templateEngine)) {
 
-            // load template paths
-            $options['loader'] = new \Mustache_Loader_FilesystemLoader(
-                $options['templatePaths']
-            );
+            $loaders = [];
+            foreach ($options['template']['paths'] as $templatePath) {
+                $loaders[] = new \Mustache_Loader_FilesystemLoader(
+                    $templatePath,
+                    $options['template']
+                );
+            }
 
-            unset($options['templatePaths']);
+            // defines the mustache loaders
+            $options['loader'] = new \Mustache_Loader_CascadingLoader($loaders);
 
             $this->templateEngine = new \Mustache_Engine($options);
         }
