@@ -91,6 +91,42 @@ class Mustache
     }
 
     /**
+     * Fetch a HTML script tag with the template content
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.0
+     * @param  string $template Template to fetch content
+     * @param  string $options
+     * - htmlAttributes () HTML attributes to print in script tag
+     * @throws InvalidArgumentException
+     * @return string HTML script tag with the template content
+     */
+    public function getTemplateTagScript($template, array $options = [])
+    {
+        // validate the template name
+        if (!$template) {
+            throw new InvalidArgumentException(
+                'The template name must be informed to get your HTML script tag'
+            );
+        }
+
+        if (!isset($options['htmlAttributes'])) {
+            $options['htmlAttributes'] = [];
+        } else if (!is_array($options['htmlAttributes'])) {
+            throw new InvalidArgumentException(
+                'The "htmlAttributes" option must be an array'
+            );
+        }
+
+        $htmlAttributes = $this->processHtmlAttributes(
+            $options['htmlAttributes']
+        );
+
+        return '<script' . $htmlAttributes . '>' .
+            $this->templateEngine->getLoader()->load($template) .
+            '</script>';
+    }
+
+    /**
      * Returns the instance from Mustache Template Engine
      * @author Andrews Lince <andrews.lince@gmail.com>
      * @since  1.0.0
@@ -133,5 +169,33 @@ class Mustache
         }
 
         return $this->templateEngine;
+    }
+
+    /**
+     * Process the attributes to HTML script tag from template
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.0
+     * @param  array $options
+     * - htmlAttributes
+     * @return string
+     */
+    private function processHtmlAttributes(array $options = [])
+    {
+        $htmlAttributes = '';
+
+        // default attributes
+        $attributes = array('type' => 'x-tmpl-mustache');
+
+        // check if exists custom attributes
+        if (!empty($options)) {
+            $attributes = array_merge($attributes, $options);
+        }
+
+        // compose the string with all HTML attributes
+        foreach ($attributes as $key => $value) {
+            $htmlAttributes .= " $key=\"$value\"";
+        }
+
+        return $htmlAttributes;
     }
 }
