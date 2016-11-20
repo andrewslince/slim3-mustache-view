@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-namespace Slim\View;
+namespace Slim\Views;
 
 use Psr\Http\Message\ResponseInterface;
 use InvalidArgumentException;
@@ -32,9 +32,9 @@ use InvalidArgumentException;
 /**
  * A Mustache view class for Slim 3 Framework
  * @author    Andrews Lince <andrews.lince@gmail.com>
- * @version   1.0.0
+ * @version   1.0.1
  * @link      https://github.com/andrewslince/slim3-mustache-view
- * @package   Slim/View
+ * @package   Slim/Views
  * @copyright 2016 Andrews Lince
  */
 class Mustache

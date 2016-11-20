@@ -29,7 +29,7 @@ $container = $app->getContainer();
 
 // register view template engine and configurations
 $container['renderer'] = function () {
-    return new \Slim\View\Mustache([
+    return new \Slim\Views\Mustache([
 
         // REQUIRED
         'template' => [
