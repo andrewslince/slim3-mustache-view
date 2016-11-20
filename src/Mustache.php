@@ -96,7 +96,8 @@ class Mustache
      * @since  1.0.0
      * @param  string $template Template to fetch content
      * @param  string $options
-     * - htmlAttributes () HTML attributes to print in script tag
+     * - (array)   htmlAttributes => HTML attributes to print in script tag
+     * - (boolean) minify         => returns the minified content
      * @throws InvalidArgumentException
      * @return string HTML script tag with the template content
      */
@@ -109,6 +110,7 @@ class Mustache
             );
         }
 
+        // process attributes from HTML script tag
         if (!isset($options['htmlAttributes'])) {
             $options['htmlAttributes'] = [];
         } else if (!is_array($options['htmlAttributes'])) {
@@ -116,14 +118,17 @@ class Mustache
                 'The "htmlAttributes" option must be an array'
             );
         }
-
         $htmlAttributes = $this->processHtmlAttributes(
             $options['htmlAttributes']
         );
 
-        return '<script' . $htmlAttributes . '>' .
-            $this->templateEngine->getLoader()->load($template) .
-            '</script>';
+        // process template content
+        $templateContent = $this->templateEngine->getLoader()->load($template);
+        if (isset($options['minify']) && $options['minify']) {
+            $templateContent = $this->htmlMinify($templateContent);
+        }
+
+        return "<script $htmlAttributes>$templateContent</script>";
     }
 
     /**
@@ -196,6 +201,58 @@ class Mustache
             $htmlAttributes .= " $key=\"$value\"";
         }
 
-        return $htmlAttributes;
+        return ltrim($htmlAttributes);
+    }
+
+    /**
+     * Minify a HTML content
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.0
+     * @link   https://github.com/HossamYousef/slim3-minify/blob/master/src/Slim/Middleware/Minify.php
+     * @param  string $content
+     * @return string
+     */
+    private function htmlMinify($content)
+    {
+        $search = array(
+
+            /**
+             * remove tabs before and after HTML tags
+             */
+            '/\>[^\S ]+/s',
+            '/[^\S ]+\</s',
+
+            /**
+             * remove empty lines (between HTML tags); cannot remove just
+             * any line-end characters because in inline JS they can matter!
+             */
+            '/\>[\r\n\t ]+\</s',
+
+            /**
+             * shorten multiple whitespace sequences
+             */
+            '/(\s)+/s',
+
+            /**
+             * replace end of line by a space
+             */
+            '/\n/',
+
+            /**
+             * remove any HTML comments, except MSIE conditional comments
+             */
+            '/<!--(?!\s*(?:\[if [^\]]+]|<!|>))(?:(?!-->).)*-->/s',
+        );
+
+        $replace = array(
+            '>',
+            '<',
+            '><',
+            '\\1',
+            ' ',
+            ''
+        );
+
+        return preg_replace($search, $replace, $content);
     }
 }
