@@ -3,6 +3,7 @@
     "description": "PHP Mustache view class for Slim 3 Framework",
     "type": "library",
     "license": "MIT",
+    "keywords": [ "slim", "framework", "view", "mustache" ],
     "authors": [
         {
             "name": "Andrews Lince",
