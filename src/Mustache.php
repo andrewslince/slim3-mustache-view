@@ -27,6 +27,7 @@
 namespace Slim\View;
 
 use Psr\Http\Message\ResponseInterface;
+use InvalidArgumentException;
 
 /**
  * A Mustache view class for Slim 3 Framework
@@ -98,11 +99,24 @@ class Mustache
      *   - extension
      *   - charset
      *   - paths[]
+     * @throws InvalidArgumentException
      * @return Mustache_Engine
      */
     public function getTemplateEngine(array $options = [])
     {
         if (is_null($this->templateEngine)) {
+
+            if (!isset($options['template']['paths'])) {
+                throw new InvalidArgumentException(
+                    'Template paths was not informed'
+                );
+            }
+
+            if (!is_array($options['template']['paths'])) {
+                throw new InvalidArgumentException(
+                    'Template paths must be an array'
+                );
+            }
 
             $loaders = [];
             foreach ($options['template']['paths'] as $templatePath) {
