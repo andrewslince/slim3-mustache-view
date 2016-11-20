@@ -68,6 +68,10 @@ $app->run();
 
 ¹ See other Mustache options [here](https://github.com/bobthecow/mustache.php/wiki#constructor-options).
 
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
 ## Credits
 
 - [Andrews Lince](https://github.com/andrewslince)
