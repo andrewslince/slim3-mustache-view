@@ -33,7 +33,7 @@ use InvalidArgumentException;
  * A Mustache view class for Slim 3 Framework
  * @author    Andrews Lince <andrews.lince@gmail.com>
  * @version   1.0.0
- * @link      https://github.com/andrewslince/slim3-mustache
+ * @link      https://github.com/andrewslince/slim3-mustache-view
  * @package   Slim/View
  * @copyright 2016 Andrews Lince
  */
