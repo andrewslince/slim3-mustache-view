@@ -1,5 +1,5 @@
 {
-    "name": "andrews/slim3-mustache",
+    "name": "andrewslince/slim3-mustache-view",
     "description": "PHP Mustache view class for Slim 3 Framework",
     "type": "library",
     "license": "MIT",
