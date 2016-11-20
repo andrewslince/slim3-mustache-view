@@ -1,12 +1,12 @@
 # CHANGELOG
 
-## [1.0.1] (2016-11-20)
+## [1.0.1] / 2016-11-20
 
 ### Changed
 
 * [ [#13](https://github.com/andrewslince/slim3-mustache-view/issues/13) ] Updated the namespace from to `\Slim\View` to `\Slim\Views`
 
-## 1.0.0 (2016-11-20)
+## 1.0.0 / 2016-11-20
 
 ### Added
 
