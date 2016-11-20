@@ -2,7 +2,7 @@
 
 ## Report bugs or improvements
 
-If you found a bug or want suggest an improvement, [submit an issue](issues).
+If you found a bug or want suggest an improvement, [submit an issue](../../issues).
 
 ## Pull Requests
 
