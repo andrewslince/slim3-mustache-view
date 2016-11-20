@@ -101,7 +101,7 @@ class Mustache
      * @throws InvalidArgumentException
      * @return string HTML script tag with the template content
      */
-    public function getTemplateTagScript($template, array $options = [])
+    public function getTemplateScriptTag($template, array $options = [])
     {
         // validate the template name
         if (!$template) {
