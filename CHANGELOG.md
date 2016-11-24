@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [1.0.2] / 2016-11-24
+
+### Fixed
+
+* [ [#14](https://github.com/andrewslince/slim3-mustache-view/issues/14) ] Added mustache dependency in composer.json.
+
 ## [1.0.1] / 2016-11-20
 
 ### Changed
@@ -15,3 +21,4 @@
 * [ [#9](https://github.com/andrewslince/slim3-mustache-view/issues/9) ] Added support to get minified HTML script tags
 
 [1.0.1]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.0...1.0.1
+[1.0.2]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.1...1.0.2
