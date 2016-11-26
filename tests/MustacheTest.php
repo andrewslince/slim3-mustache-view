@@ -27,6 +27,9 @@
 namespace Slim\Tests\Views;
 
 use Slim\Views\Mustache as SlimMustache;
+use Slim\Http\Response;
+use Slim\Http\Headers;
+use Slim\Http\Body;
 
 /**
  * Class to test Slim Mustache wrapper
@@ -46,6 +49,13 @@ class MustacheTest extends \PHPUnit_Framework_TestCase
     private $slimMustacheObject = null;
 
     /**
+     * Slim Response object
+     * @since 1.0.3
+     * @var   \Slim\Http\Response
+     */
+    private $responseInterface = null;
+
+    /**
      * Return a default options to create a '\Slim\Views\Mustache' object
      * @author Andrews Lince <andrews.lince@gmail.com>
      * @since  1.0.3
@@ -62,7 +72,7 @@ class MustacheTest extends \PHPUnit_Framework_TestCase
                 'extension' => 'html',
                 'charset' => 'utf-8',
                 'paths' => [
-                    realpath('./templates')
+                    realpath(__DIR__ . DIRECTORY_SEPARATOR . 'templates')
                 ]
             ]
         ];
@@ -80,6 +90,20 @@ class MustacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Returns the body's content from response object
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
+     * @param  \Slim\Http\Response $reponse
+     * @return string
+     */
+    private function getBodyContents(Response $reponse)
+    {
+        $reponse->getBody()->rewind();
+
+        return trim($reponse->getBody()->getContents());
+    }
+
+    /**
      * [setUp description]
      * @author Andrews Lince <andrews.lince@gmail.com>
      * @since  1.0.3
@@ -88,6 +112,11 @@ class MustacheTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->slimMustacheObject = $this->getDefaultSlimMustacheObject();
+        $this->responseInterface  = new Response(
+            200,
+            new Headers(),
+            new Body(fopen('php://temp', 'r+'))
+        );
     }
 
     /**
@@ -155,5 +184,68 @@ class MustacheTest extends \PHPUnit_Framework_TestCase
         $wrongOptions['template']['paths'] = realpath('./templates');
 
         new SlimMustache($wrongOptions);
+    }
+
+    /**
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
+     * @return void
+     */
+    public function testRender()
+    {
+        // template variable
+        $name = 'Andrews';
+
+        $newResponse = $this->slimMustacheObject->render(
+            $this->responseInterface,
+            'simple-view',
+            [ 'name' => $name ]
+        );
+
+        $this->assertEquals(
+            "Hello $name",
+            $this->getBodyContents($newResponse)
+        );
+    }
+
+    /**
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
+     * @return void
+     */
+    public function testRenderWithMoreThanOneTemplatePaths()
+    {
+        // template variable
+        $name = 'Andrews';
+
+        // add another path in constructor options
+        $options = $this->getDefaultOptions();
+        $options['template']['paths'][] = realpath(
+            __DIR__ . DIRECTORY_SEPARATOR . 'another-templates'
+        );
+
+        // create Mustache object
+        $slimMustacheObject = new SlimMustache($options);
+
+        $newResponse = $slimMustacheObject->render(
+            $this->responseInterface,
+            'another-simple-view'
+        );
+
+        $this->assertEquals(
+            'Another simple content',
+            $this->getBodyContents($newResponse)
+        );
+    }
+
+    /**
+     * @expectedException \Mustache_Exception_UnknownTemplateException
+     */
+    public function testRenderTemplateNotFound()
+    {
+        $this->slimMustacheObject->render(
+            $this->responseInterface,
+            'not-found-template'
+        );
     }
 }
