@@ -68,6 +68,14 @@ $app->run();
 
 ¹ See other Mustache options [here](https://github.com/bobthecow/mustache.php/wiki#constructor-options).
 
+## Testing
+
+To running unit tests, executes the command below:
+
+```bash
+./vendor/bin/phpunit -c phpunit.xml.dist
+```
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.

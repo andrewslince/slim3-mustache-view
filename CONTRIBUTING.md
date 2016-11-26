@@ -15,3 +15,9 @@ It is very important to separate new features or improvements into separate feat
 ## Coding standards
 
 All pull requests must follow the standards of [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) and  [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md).
+
+## Unit Testing
+
+All pull requests must be accompanied by passing unit tests and complete code coverage. The Slim Framework uses phpunit for testing.
+
+[Learn about PHPUnit](https://github.com/sebastianbergmann/phpunit/)
