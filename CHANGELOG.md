@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## [1.0.3] / 2016-11-26
+
+### Added
+
+* [ [#10](https://github.com/andrewslince/slim3-mustache-view/issues/10) ] Added unit tests.
+
+### Removed
+
+* Removed the unused property `$options`.
+
+### Changed
+
+* Changed the accessor modifier of the `\Slim\Views\Mustache::getTemplateEngine()` method from `public` to `private`.
+
 ## [1.0.2] / 2016-11-24
 
 ### Fixed
@@ -22,3 +36,4 @@
 
 [1.0.1]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.0...1.0.1
 [1.0.2]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.1...1.0.2
+[1.0.3]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.2...1.0.3
