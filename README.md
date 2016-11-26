@@ -1,6 +1,8 @@
 # Slim 3 Framework Mustache View
 
 [![Build Status](https://travis-ci.org/andrewslince/slim3-mustache-view.svg?branch=master)](https://travis-ci.org/andrewslince/slim3-mustache-view)
+[![Latest Stable Version](https://poser.pugx.org/andrewslince/slim3-mustache-view/version)](https://packagist.org/packages/andrewslince/slim3-mustache-view)
+[![License](https://poser.pugx.org/andrewslince/slim3-mustache-view/license)](https://packagist.org/packages/andrewslince/slim3-mustache-view)
 
 A [PHP Mustache](https://github.com/bobthecow/mustache.php) class for render views on [Slim 3 Framework](http://www.slimframework.com/).
 
