@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.0.4] / 2016-11-26
+
+### Added
+
+* [ [#11](https://github.com/andrewslince/slim3-mustache-view/issues/11) ] Integrated Travis CI;
+* Added badges to stable version and MIT license.
+
 ## [1.0.3] / 2016-11-26
 
 ### Added
@@ -37,3 +44,4 @@
 [1.0.1]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.0...1.0.1
 [1.0.2]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.1...1.0.2
 [1.0.3]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.2...1.0.3
+[1.0.4]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.3...1.0.4
