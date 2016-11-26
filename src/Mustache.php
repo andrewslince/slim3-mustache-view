@@ -143,7 +143,7 @@ class Mustache
      * @throws InvalidArgumentException
      * @return Mustache_Engine
      */
-    public function getTemplateEngine(array $options = [])
+    private function getTemplateEngine(array $options = [])
     {
         if (is_null($this->templateEngine)) {
 
