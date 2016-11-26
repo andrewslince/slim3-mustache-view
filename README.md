@@ -1,5 +1,7 @@
 # Slim 3 Framework Mustache View
 
+[![Build Status](https://travis-ci.org/andrewslince/slim3-mustache-view.svg?branch=master)](https://travis-ci.org/andrewslince/slim3-mustache-view)
+
 A [PHP Mustache](https://github.com/bobthecow/mustache.php) class for render views on [Slim 3 Framework](http://www.slimframework.com/).
 
 ## Requirements
