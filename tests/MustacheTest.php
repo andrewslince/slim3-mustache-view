@@ -239,13 +239,102 @@ class MustacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
      * @expectedException \Mustache_Exception_UnknownTemplateException
+     * @return void
      */
     public function testRenderTemplateNotFound()
     {
         $this->slimMustacheObject->render(
             $this->responseInterface,
             'not-found-template'
+        );
+    }
+
+    /**
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
+     * @return void
+     */
+    public function testGetTemplateScriptTag()
+    {
+        $tplScriptTag = $this->slimMustacheObject->getTemplateScriptTag(
+            'simple-view'
+        );
+
+        $outputScriptTag = '<script type="x-tmpl-mustache">Hello {{name}}
+</script>';
+
+        $this->assertEquals($outputScriptTag, $tplScriptTag);
+    }
+
+    /**
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
+     * @expectedException InvalidArgumentException
+     * @return void
+     */
+    public function testGetTemplateScriptTagWithoutTemplateName()
+    {
+        $this->slimMustacheObject->getTemplateScriptTag(null);
+    }
+
+    /**
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
+     * @expectedException InvalidArgumentException
+     * @return void
+     */
+    public function testGetTemplateScriptTagWithInvalidOptionHtmlAttributes()
+    {
+        $this->slimMustacheObject->getTemplateScriptTag(
+            'simple-view',
+            [ 'htmlAttributes' => 'style="display:none;"' ]
+        );
+    }
+
+    /**
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
+     * @return void
+     */
+    public function testGetTemplateScriptTagWithMinifyOption()
+    {
+        $tplScriptTag = $this->slimMustacheObject->getTemplateScriptTag(
+            'simple-view',
+            [ 'minify' => true ]
+        );
+
+        $this->assertEquals(
+            '<script type="x-tmpl-mustache">Hello {{name}} </script>',
+            $tplScriptTag
+        );
+    }
+
+    /**
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
+     * @return void
+     */
+    public function testGetTemplateScriptTagWithCustomAttributeTag()
+    {
+        $attributeName = 'id';
+        $attributeValue = 'whatever';
+
+        $tplScriptTag = $this->slimMustacheObject->getTemplateScriptTag(
+            'simple-view',
+            [
+                'minify' => true,
+                'htmlAttributes' => [
+                    $attributeName => $attributeValue
+                ]
+            ]
+        );
+
+        $this->assertEquals(
+            "<script type=\"x-tmpl-mustache\" $attributeName=\"$attributeValue\">Hello {{name}} </script>",
+            $tplScriptTag
         );
     }
 }
