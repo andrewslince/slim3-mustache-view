@@ -377,4 +377,30 @@ class MustacheTest extends \PHPUnit_Framework_TestCase
             )
         );
     }
+
+    /**
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
+     * @return void
+     */
+    public function testHtmlMinify()
+    {
+        $htmlSource = '<div id="whatever">
+            <h1>Title</h1>
+            <main>
+                <p>Content</p>
+            </main>
+        </div>';
+
+        $htmlTarget = '<div id="whatever"><h1>Title</h1><main><p>Content</p></main></div>';
+
+        $this->assertEquals(
+            $htmlTarget,
+            $this->invokeMethod(
+                $this->slimMustacheObject,
+                'htmlMinify',
+                [ $htmlSource ]
+            )
+        );
+    }
 }
