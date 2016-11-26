@@ -337,4 +337,44 @@ class MustacheTest extends \PHPUnit_Framework_TestCase
             $tplScriptTag
         );
     }
+
+    /**
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
+     * @return void
+     */
+    public function testProcessHtmlAttributesWithDefaultAttributes()
+    {
+        $this->assertEquals(
+            'type="x-tmpl-mustache"',
+            $this->invokeMethod(
+                $this->slimMustacheObject,
+                'processHtmlAttributes'
+            )
+        );
+    }
+
+    /**
+     * @author Andrews Lince <andrews.lince@gmail.com>
+     * @since  1.0.3
+     * @return void
+     */
+    public function testProcessHtmlAttributesWithCustomAttributes()
+    {
+        $customAttributeName = 'id';
+        $customAttributeValue = 'whatever';
+
+        $this->assertEquals(
+            "type=\"x-tmpl-mustache\" $customAttributeName=\"$customAttributeValue\"",
+            $this->invokeMethod(
+                $this->slimMustacheObject,
+                'processHtmlAttributes',
+                [
+                    [
+                        $customAttributeName => $customAttributeValue
+                    ]
+                ]
+            )
+        );
+    }
 }
