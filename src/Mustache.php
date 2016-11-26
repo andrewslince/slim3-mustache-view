@@ -40,13 +40,6 @@ use InvalidArgumentException;
 class Mustache
 {
     /**
-     * Mustache settings
-     * @since 1.0.0
-     * @var   array
-     */
-    protected $options = array();
-
-    /**
      * Instance of Mustache Template Engine
      * @since 1.0.0
      * @var   Mustache_Engine
@@ -62,8 +55,6 @@ class Mustache
      */
     public function __construct(array $options = [])
     {
-        $this->options = $options;
-
         $this->templateEngine = $this->getTemplateEngine($options);
     }
 
