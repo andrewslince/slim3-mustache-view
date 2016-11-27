@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [1.0.5] / 2016-11-27
+
+### Added
+
+* [ [#16](https://github.com/andrewslince/slim3-mustache-view/issues/16) ] Integrated Scrutinizer.
+
 ## [1.0.4] / 2016-11-26
 
 ### Added
@@ -45,3 +51,4 @@
 [1.0.2]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.1...1.0.2
 [1.0.3]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.2...1.0.3
 [1.0.4]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.3...1.0.4
+[1.0.5]: https://github.com/andrewslince/slim3-mustache-view/compare/1.0.4...1.0.5
